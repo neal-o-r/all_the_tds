@@ -38,13 +38,15 @@ def reelection_frac():
 
         reel_frac = []
         for i in range(0,31):
-                seats_in_both  = len(set(tds[i])) + len(set(tds[i+1]))
-                people_in_both = len(set(tds[i]).union(set(tds[i+1])))
-
-                reel_frac.append(people_in_both / seats_in_both)
+                
+                seats_available = len(set(tds[i+1]))
+                people_in_both  = len(set(tds[i]).intersection(set(tds[i+1])))
+                
+                reel_frac.append(people_in_both / seats_available)
         
         return reel_frac
 
+tds = read_names()
 years = read_dates()
 pct   = [i*100 for i in reelection_frac()]
 
